@@ -72,8 +72,7 @@ public class SoqlInputPlugin implements InputPlugin
         try {
             PluginTask pluginTask = config.loadConfig(PluginTask.class);
             ForceClient forceClient = new ForceClient(pluginTask);
-            String soql = SoqlUtils.soqlForGuess(pluginTask.getSoql());
-            JsonArray jsonArray = forceClient.query(pluginTask.getObject(), soql);
+            JsonArray jsonArray = forceClient.query(pluginTask.getObject(), pluginTask.getSoql());
             JsonNode columns = InputPluginUtils.createGuessColums(jsonArray);
             return Exec.newConfigDiff().set("columns", columns);
         }
